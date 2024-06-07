@@ -7712,7 +7712,6 @@ var InternalState =  (function () {
                     _this.onError(error_1);
                 }
                 else if (result.data &&
-                    (previousResult === null || previousResult === void 0 ? void 0 : previousResult.networkStatus) !== result.networkStatus &&
                     result.networkStatus === exports.NetworkStatus.ready) {
                     _this.onCompleted(result.data);
                 }
