@@ -1,0 +1,1 @@
+{"version":3,"file":"setErrorMessageHandler.d.ts","sourceRoot":"","sources":["../../src/dev/setErrorMessageHandler.ts"],"names":[],"mappings":"AAIA;;;;GAIG;AACH,MAAM,MAAM,mBAAmB,GAAG;IAChC;;;;;;;;;;;;;;;;;;;;;OAqBG,CAAC,CAAC,OAAO,EAAE,MAAM,GAAG,MAAM,EAAE,IAAI,EAAE,MAAM,EAAE,GAAG,MAAM,GAAG,SAAS,CAAC;CACpE,CAAC;AAEF;;GAEG;AACH,wBAAgB,sBAAsB,CAAC,OAAO,EAAE,mBAAmB,QAElE"}

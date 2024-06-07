@@ -2,7 +2,7 @@
   "name": "@apollo/client",
   "version": "3.10.4",
   "description": "A fully-featured caching GraphQL client.",
-  "private": true,
+  "private": false,
   "keywords": [
     "apollo",
     "graphql",
@@ -13,12 +13,12 @@
   ],
   "author": "packages@apollographql.com",
   "license": "MIT",
-  "main": "./dist/main.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./main.cjs",
+  "module": "./index.js",
+  "types": "./index.d.ts",
   "sideEffects": false,
   "react-native": {
-    "./dist/cache/inmemory/fixPolyfills.js": "./dist/cache/inmemory/fixPolyfills.native.js",
+    "./dist/cache/inmemory/fixPolyfills.js": "./cache/inmemory/fixPolyfills.native.js",
     "react-dom/server": false
   },
   "repository": {
@@ -29,46 +29,6 @@
     "url": "https://github.com/apollographql/apollo-client/issues"
   },
   "homepage": "https://www.apollographql.com/docs/react/",
-  "scripts": {
-    "prebuild": "npm run clean",
-    "build": "tsc",
-    "postbuild": "npm run update-version && npm run inline-inherit-doc && npm run invariants && npm run sourcemaps && npm run rollup && npm run prepdist && npm run postprocess-dist && npm run verify-version",
-    "apply-patches": "patch-package",
-    "update-version": "node config/version.js update",
-    "verify-version": "node config/version.js verify",
-    "invariants": "ts-node-script config/processInvariants.ts",
-    "sourcemaps": "ts-node-script config/rewriteSourceMaps.ts",
-    "rollup": "rollup -c ./config/rollup.config.js",
-    "prepdist": "node ./config/prepareDist.js",
-    "prepdist:changesets": "ts-node-script config/prepareChangesetsRelease.ts",
-    "postprocess-dist": "ts-node-script config/postprocessDist.ts",
-    "extract-api": "npm run build && ts-node-script config/apiExtractor.ts --generate apiReport",
-    "clean": "rimraf dist coverage lib temp",
-    "check:format": "prettier --check .",
-    "ci:precheck": "node config/precheck.js",
-    "format": "prettier --write .",
-    "lint": "eslint 'src/**/*.{[jt]s,[jt]sx}'",
-    "inline-inherit-doc": "ts-node-script config/inlineInheritDoc.ts",
-    "test": "node --expose-gc ./node_modules/jest/bin/jest.js --config ./config/jest.config.js",
-    "test:debug": "node --inspect-brk node_modules/.bin/jest --config ./config/jest.config.js --runInBand --testTimeout 99999 --logHeapUsage",
-    "test:ci": "TEST_ENV=ci npm run test:coverage -- --logHeapUsage && npm run test:memory",
-    "test:watch": "jest --config ./config/jest.config.js --watch",
-    "test:memory": "npm i && npm run build && cd scripts/memory && npm i && npm test",
-    "test:coverage": "npm run coverage -- --ci --runInBand --reporters=default --reporters=jest-junit",
-    "coverage": "node --no-compilation-cache --expose-gc --max_old_space_size=4096 node_modules/.bin/jest --config ./config/jest.config.js --logHeapUsage --coverage --watchAll=false",
-    "bundlesize": "npm run build && ts-node-script ./config/bundlesize.ts",
-    "predeploy": "npm run build",
-    "deploy": "cd dist && npm publish --tag next",
-    "typedoc": "typedoc src/index.ts --json docs/public/docs.json",
-    "docmodel": "tsc && npm run inline-inherit-doc && ts-node-script config/apiExtractor.ts --main-only --generate docModel",
-    "changeset-publish": "npm run build && npm run prepdist:changesets && cd dist && changeset publish",
-    "changeset-check": "changeset status --verbose --since=origin/main",
-    "changeset-version": "changeset version && npm i",
-    "update-size-limits": "size-limit --json | jq '. | map(select(.sizeLimit) | { key: .name, value: .size}) | from_entries' | tee .new-size-limits.json; mv .new-size-limits.json .size-limits.json"
-  },
-  "engines": {
-    "npm": "^7.20.3 || ^8.0.0 || ^9.0.0 || ^10.0.0"
-  },
   "peerDependencies": {
     "graphql": "^15.0.0 || ^16.0.0",
     "graphql-ws": "^5.5.5",
@@ -198,5 +158,6 @@
     "**/*.js.map",
     "**/*.d.ts",
     "**/*.json"
-  ]
+  ],
+  "type": "module"
 }
